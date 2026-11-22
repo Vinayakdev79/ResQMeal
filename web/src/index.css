@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cream text-charcoal font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight;
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid #173F35;
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+}
+
+@layer components {
+  /* Entrance animation for a single element */
+  .reveal {
+    @apply animate-fade-up;
+  }
+
+  /* Staggered entrance for direct children */
+  .stagger > * {
+    @apply animate-fade-up;
+  }
+  .stagger > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger > *:nth-child(2) { animation-delay: 60ms; }
+  .stagger > *:nth-child(3) { animation-delay: 120ms; }
+  .stagger > *:nth-child(4) { animation-delay: 180ms; }
+  .stagger > *:nth-child(5) { animation-delay: 240ms; }
+  .stagger > *:nth-child(6) { animation-delay: 300ms; }
+  .stagger > *:nth-child(7) { animation-delay: 360ms; }
+  .stagger > *:nth-child(8) { animation-delay: 420ms; }
+
+  /* Lift and shadow on hover */
+  .card-hover {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -12px rgba(23, 63, 53, 0.18);
+  }
+
+  /* Subtle press feedback */
+  .btn-press {
+    transition: transform 0.12s ease-out;
+  }
+  .btn-press:active {
+    transform: scale(0.98);
+  }
+
+  /* Loading placeholder with shimmer */
+  .skeleton {
+    @apply animate-shimmer;
+    background: linear-gradient(90deg, #EAE9E2 25%, #F8F6F0 37%, #EAE9E2 63%);
+    background-size: 400% 100%;
+  }
+}
+
+@layer utilities {
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Respect users who ask for less motion: disable animations and transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
